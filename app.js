@@ -60,7 +60,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
-
+app.options("*", cors(corsOptions))
 app.use(cors(corsOptions))
 
 app.use("/api/v1/users", userRoutes)
