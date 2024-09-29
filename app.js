@@ -54,32 +54,9 @@ app.use(cookieParser())
 const adminSecretKey = process.env.ADMIN_SECRET_KEY || "dadjasgdugwufeJKdf"
 const userSocketIDs = new Map()
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
 
-const allowedOrigins = [
-  "https://chat-app-wft1.vercel.app", "http://localhost:5173", process.env.CLIENT_URL
-]
+app.use(cors(corsOptions))
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin 
-    // (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.indexOf(origin) === -1) {
-      var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true // Allow credentials
-}));
-app.options("*", cors(corsOptions));
 
 app.use("/api/v1/users", userRoutes)
 app.use("/api/v1/chats", chatRoutes)
