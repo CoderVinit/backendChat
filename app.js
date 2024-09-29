@@ -7,7 +7,6 @@ import adminRoutes from "./routes/adminRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import { connectDb } from "./utils/features.js";
-import { Server } from 'socket.io'
 import { createServer } from 'http'
 import { NEW_MESSAGE, NEW_MESSAGES_ALERT, START_TYPING, STOP_TYPING } from "./constants/events.js";
 import { v4 as uuid } from 'uuid'
@@ -16,6 +15,7 @@ import { Message } from "./models/messageModel.js";
 import { v2 as cloudinary } from "cloudinary";
 import { corsOptions } from "./constants/config.js";
 import { socketAuthenticator } from "./middleware/auth.js";
+import { Server } from "socket.io";
 
 
 
